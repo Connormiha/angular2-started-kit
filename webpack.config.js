@@ -11,9 +11,8 @@ const PARAMS = {};
 const nodePath = path.join(__dirname, './node_modules');
 const sourcePath = path.join(__dirname, './src/');
 
-function extractStyle(loaders) {
-    return ExtractTextPlugin.extract('style', loaders.substr(loaders.indexOf('!')));
-}
+const extractStyle = (loaders) =>
+    ExtractTextPlugin.extract('style', loaders.substr(loaders.indexOf('!')));
 
 let cssLoaders = 'style!css?localIdentName=[hash:base64]';
 let stylusLoaders = `${cssLoaders}!stylus`;
@@ -51,13 +50,6 @@ module.exports = {
     watch: PARAMS.watch,
     module: {
         noParse: [/\.min\.js$/],
-        // preLoaders: [
-        //     {
-        //         test: /\.jsx?$/,
-        //         exclude: [nodePath],
-        //         loader: 'eslint'
-        //     }
-        // ],
         loaders: [
             {
                 test: /\.ts?$/,
@@ -87,7 +79,6 @@ module.exports = {
             poststylus(autoprefixer({browsers: ['last 2 versions']}))
         ]
     },
-    //postcss: [postCssPreCss, autoprefixer({browsers: ['last 2 versions']})],
     //devtool: PARAMS.sourceMap,
     plugins: [
         new HtmlWebpackPlugin({

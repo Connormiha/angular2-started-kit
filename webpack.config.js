@@ -6,6 +6,7 @@ const autoprefixer = require('autoprefixer');
 const poststylus = require('poststylus');
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const WebpackNotifierPlugin = require('webpack-notifier');
 const path = require('path');
 const PARAMS = {};
 const nodePath = path.join(__dirname, './node_modules');
@@ -92,7 +93,8 @@ module.exports = {
             'process.env': {
                 'NODE_ENV': JSON.stringify(NODE_ENV)
             }
-        })
+        }),
+        new WebpackNotifierPlugin()
     ],
     devServer: {
         host: 'localhost',
